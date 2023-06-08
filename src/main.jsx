@@ -9,12 +9,28 @@ import {
 import Main from './layouts/Main.jsx';
 import AuthProvider from './componants/AuthProvider/AuthProvider.jsx';
 import NotFound from './componants/NotFoundPage/NotFoundPage.jsx';
+import Login from './componants/Login/Login.jsx';
+import Register from './componants/Register/Register.jsx';
+import Home from './componants/Home/Home.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element:  <Main></Main>,
-    errorElement: <NotFound></NotFound>
+    errorElement: <NotFound></NotFound>,
+    children: [
+      {
+        path: "/", element: <Home></Home>
+      },
+      {
+        path: "/login",
+        element: <Login></Login>
+      },
+      {
+        path: "/register",
+        element: <Register></Register>
+      }
+    ]
   },
 ]);
 
