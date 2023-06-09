@@ -12,6 +12,7 @@ import NotFound from './componants/NotFoundPage/NotFoundPage.jsx';
 import Login from './componants/Login/Login.jsx';
 import Register from './componants/Register/Register.jsx';
 import Home from './componants/Home/Home.jsx';
+import PopularInstructors from './componants/HomePages/PopularInstructors.jsx';
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,13 @@ const router = createBrowserRouter([
     errorElement: <NotFound></NotFound>,
     children: [
       {
-        path: "/", element: <Home></Home>
+        path: "/", element: <Home></Home>,
+        loader: () => fetch('http://localhost:5000/instractor')
+      },
+      {
+        path: "/instractor", 
+        element: <PopularInstructors></PopularInstructors>,
+        
       },
       {
         path: "/login",
