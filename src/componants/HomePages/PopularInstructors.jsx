@@ -9,7 +9,7 @@ const PopularInstructors = () => {
       <h1 className="flex justify-center font-bold text-4xl py-10">
         Popular Instructors
       </h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
         {instructors.map((instructor, index) => (
           <div
             key={index}
