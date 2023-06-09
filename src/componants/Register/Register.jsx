@@ -4,6 +4,8 @@ import {
   GoogleAuthProvider,
   getAuth,
   signInWithPopup,
+  updateCurrentUser,
+  updateProfile,
 } from "firebase/auth";
 import app from "../firebase/firebase.init";
 import { AuthContext } from "../AuthProvider/AuthProvider";
@@ -57,7 +59,42 @@ const Registration = () => {
     const email = event.target.email.value;
     const password = event.target.password.value;
     const confirmPassword = event.target.confirmpasswords.value;
-    const photo = event.target.photo.value;
+
+    // image Upload
+    const photo = event.target.photo.files[0];
+    const formData = new FormData()
+    formData.append("img", photo)
+
+    const url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_KEY}`
+
+    fetch( url, {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Connection': 'keep-alive',
+        'Content-Type': 'application/json',
+    },
+      body: formData
+    }).then(res => res.json()).then(imgedata => {
+      console.log(imgedata);
+      const photoUrl = imgedata.display_url
+      createUser(email, password)
+      .then((result) => {
+        updateProfile(name, photoUrl)
+        .then(result => {
+          console.log(result.user);
+        })
+      })
+      .catch((error) => {
+        console.log("error", error.message);
+      });
+    })
+    .catch((error) => {
+      console.log("error", error.message);
+    });
+    
+
     console.log(name, email, password, confirmPassword, photo);
 
     createUser(email, password)
@@ -124,8 +161,6 @@ const Registration = () => {
                 placeholder="at least 6 characters,one capital and one special character"
                 className="input input-bordered"
                 id="password"
-                pattern="(?=.*[A-Z])(?=.*[!@#$%^&*()_+=\[{\]};:<>|./?,-])(?=.{6,})"
-                title="Password must be at least 6 characters long, contain at least one capital letter, and one special character."
                 required
               />
             </div>
