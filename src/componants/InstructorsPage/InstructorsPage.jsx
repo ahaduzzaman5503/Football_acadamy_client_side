@@ -1,36 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from 'react';
+import { useLoaderData } from 'react-router-dom';
 
-const PopularInstructors = () => {
-  const [instructors, setInstructors] = useState([]);
-  const [showAll, setShowAll] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("http://localhost:5000/instractor");
-        const data = await response.json();
-        setInstructors(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const handleClick = () => {
-    setShowAll(true);
-  };
-
-  const visibleInstructors = showAll ? instructors : instructors.slice(0, 6);
-
-  return (
-    <div>
-      <h1 className="flex justify-center font-bold text-4xl py-10">
-        Popular Instructors
-      </h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-        {visibleInstructors.map((instructor, index) => (
+const InstructorsPage = () => {
+    const allInstructor = useLoaderData()
+    return (
+        <div className='container mx-auto pt-24 pb-5'>
+             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+        {allInstructor.map((instructor, index) => (
           <div
             key={index}
             className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
@@ -46,6 +22,9 @@ const PopularInstructors = () => {
               </h5>
               <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 <span>Title:</span> {instructor.title}
+              </h5>
+              <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                <span>Email:</span> {instructor.email}
               </h5>
               <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 <span>Student:</span> {instructor.students}
@@ -70,18 +49,8 @@ const PopularInstructors = () => {
           </div>
         ))}
       </div>
-      {!showAll && (
-        <div className="flex justify-center mt-6">
-          <button
-            className="px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            onClick={handleClick}
-          >
-            Show All
-          </button>
         </div>
-      )}
-    </div>
-  );
+    );
 };
 
-export default PopularInstructors;
+export default InstructorsPage;

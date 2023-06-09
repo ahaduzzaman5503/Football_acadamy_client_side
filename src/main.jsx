@@ -14,6 +14,8 @@ import Register from './componants/Register/Register.jsx';
 import Home from './componants/Home/Home.jsx';
 import PopularInstructors from './componants/HomePages/PopularInstructors.jsx';
 import ExtraSection from './componants/HomePages/ExtraSection.jsx';
+import PopularClasses from './componants/HomePages/PopularClasses.jsx';
+import InstructorsPage from './componants/InstructorsPage/InstructorsPage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -22,17 +24,26 @@ const router = createBrowserRouter([
     errorElement: <NotFound></NotFound>,
     children: [
       {
-        path: "/", element: <Home></Home>,
-        loader: () => fetch('http://localhost:5000/instractor'),
-        loader: () => fetch('http://localhost:5000/extrasection')
+        path: "/", element: <Home></Home>
+      },
+      {
+        path: "/footballclass", 
+        element: <PopularClasses></PopularClasses>,
+        // loader: () => fetch('http://localhost:5000/footballclass')
       },
       {
         path: "/instractor", 
         element: <PopularInstructors></PopularInstructors>,
+        // loader: () => fetch('http://localhost:5000/instractor'),
       },
       {
         path: "/extrasection", 
         element: <ExtraSection></ExtraSection>,
+        // loader: () => fetch('http://localhost:5000/extrasection'),
+      },
+      {
+        path: "/instractors", element: <InstructorsPage></InstructorsPage>,
+        loader: () => fetch('http://localhost:5000/instractor')
       },
       {
         path: "/login",
