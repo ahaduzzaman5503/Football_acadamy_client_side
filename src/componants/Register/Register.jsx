@@ -1,15 +1,11 @@
 import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import {
-  GoogleAuthProvider,
-  getAuth,
-  signInWithPopup,
-  updateCurrentUser,
-  updateProfile,
+import { GoogleAuthProvider, getAuth, signInWithPopup, updateProfile,
 } from "firebase/auth";
 import app from "../firebase/firebase.init";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { FcGoogle } from "react-icons/fc";
+import { saveuser } from "../Api/Api";
 
 const Registration = () => {
   const { users, createUser } = useContext(AuthContext);
@@ -24,17 +20,19 @@ const Registration = () => {
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
 
-    /*===================Google Login========================*/
-    const handleGoogleSignIn = () => {
-      signInWithPopup(auth, provider)
-        .then((result) => {
-          const googleUser = result.user;
-          console.log(googleUser);
-        })
-        .catch((error) => {
-          console.log("error", error.message);
-        });
-    };
+  /*===================Google Login========================*/
+  const handleGoogleSignIn = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const googleUser = result.user;
+        saveuser(result.user);
+
+        navigate(from);
+      })
+      .catch((error) => {
+        console.log("error", error.message);
+      });
+  };
 
   /*=================Email Password Login===================*/
   const handleName = (event) => {
@@ -52,6 +50,7 @@ const Registration = () => {
   const PhotoUrlHandle = (event) => {
     console.log(event.target.value);
   };
+  const url = `https://api.imgbb.com/1/upload?key=4e99818e21d6800bb4874a68d0096dd4`;
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -63,27 +62,20 @@ const Registration = () => {
     // image Upload
     const photo = event.target.photo.files[0];
     const formData = new FormData()
-    formData.append("img", photo)
+    formData.append("image", photo)
 
     const url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_KEY}`
 
     fetch( url, {
       method: "POST",
-      headers: {
-        'Accept': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Connection': 'keep-alive',
-        'Content-Type': 'application/json',
-    },
       body: formData
     }).then(res => res.json()).then(imgedata => {
       console.log(imgedata);
-      const photoUrl = imgedata.display_url
+      const photoUrl = imgedata.data.display_url
       createUser(email, password)
       .then((result) => {
-        updateProfile(name, photoUrl)
+        updateProfile(auth.currentUser, {displayName: name, photoURL: photoUrl})
         .then(result => {
-          console.log(result.user);
         })
       })
       .catch((error) => {
@@ -96,21 +88,6 @@ const Registration = () => {
     
 
     console.log(name, email, password, confirmPassword, photo);
-
-    createUser(email, password)
-      .then((result) => {
-        const emailPassUser = result.user;
-        console.log(emailPassUser);
-        setUser(emailPassUser);
-        setError("");
-        event.target.reset();
-        setSuccess("User has Created Successfully");
-        navigate(from);
-      })
-      .catch((error) => {
-        setError(error.message);
-        setSuccess("");
-      });
   };
 
   return (

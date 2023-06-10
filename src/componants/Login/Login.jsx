@@ -4,6 +4,7 @@ import {GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, signInWithP
 import app from "../firebase/firebase.init";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { FcGoogle } from "react-icons/fc";
+import { saveuser } from "../Api/Api";
 
 const Login = () => {
   const {signIn} = useContext(AuthContext)
@@ -24,7 +25,7 @@ const Login = () => {
     signInWithPopup(auth, provider)
     .then((result) => {
       const googleUser = result.user;
-      console.log(googleUser);
+      saveuser(result.user)
     })
     .catch((error) => {
       console.log("error", error.message);
@@ -54,6 +55,7 @@ const Login = () => {
         setError("");
         event.target.reset();
         setSuccess("User Login Successfully");
+        saveuser(result.user)
         navigate(from)
         from.reset()
       })
