@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
-import { MdCollectionsBookmark, MdManageAccounts, MdManageHistory, MdOutlineClass, MdPayment } from 'react-icons/md';
+import { MdAssignmentAdd, MdCollectionsBookmark, MdManageAccounts, MdManageHistory, MdOutlineClass, MdPayment } from 'react-icons/md';
 import { FiUsers } from 'react-icons/fi';
-import { FaHistory } from "react-icons/fa";
+import { GiTeacher } from 'react-icons/gi';
 
 
 const Dashboard = () => {
@@ -42,6 +42,18 @@ const Dashboard = () => {
               <Link to='/dashboard/paymenthistory' className="shadow-xl"> 
               <MdManageHistory size={25}></MdManageHistory> Payment history</Link>
             </li>
+          <div className="divider"></div> 
+
+          <h1 className="font-bold flex justify-center text-xl py-4">Instructor Dashboard</h1>
+          <li>
+              <Link to='/dashboard/addclass' className="shadow-xl"> 
+              <MdAssignmentAdd size={25}></MdAssignmentAdd> Add Class</Link>
+            </li>
+          <li>
+              <Link to='/dashboard/myclass' className="shadow-xl"> 
+              <GiTeacher size={25}></GiTeacher> My Class</Link>
+            </li>
+
           <div className="divider"></div> 
 
           <h1 className="font-bold flex justify-center text-xl py-4">Admin Dashboard</h1>

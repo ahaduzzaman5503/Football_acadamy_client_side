@@ -19,6 +19,8 @@ import PaymentStudent from './componants/StudentDashboard/PaymentStudent';
 import PaymentHistory from './componants/StudentDashboard/PaymentHistory';
 import ManageClasses from './componants/AdminDashboard/ManageClasses';
 import ManageUsers from './componants/AdminDashboard/ManageUsers';
+import MyClass from './componants/InstructorDashboard/MyClass';
+import AddClass from './componants/InstructorDashboard/AddClass';
 
 const router = createBrowserRouter([
   {
@@ -76,6 +78,14 @@ const router = createBrowserRouter([
       {
         path:"/dashboard/paymenthistory", 
         element: <PaymentHistory></PaymentHistory>
+      },
+      {
+        path:"/dashboard/addclass", 
+        element: <AddClass></AddClass>
+      },
+      {
+        path:"/dashboard/myclass", 
+        element: <MyClass></MyClass>
       },
       {
         path:"/dashboard/manageclasses", 
