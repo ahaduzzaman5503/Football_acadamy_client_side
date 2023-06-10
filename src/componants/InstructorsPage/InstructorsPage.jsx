@@ -1,11 +1,11 @@
-import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import React from "react";
+import { useLoaderData } from "react-router-dom";
 
 const InstructorsPage = () => {
-    const allInstructor = useLoaderData()
-    return (
-        <div className='container mx-auto pt-24 pb-5'>
-             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+  const allInstructor = useLoaderData();
+  return (
+    <div className="container mx-auto pt-24 pb-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
         {allInstructor.map((instructor, index) => (
           <div
             key={index}
@@ -49,8 +49,8 @@ const InstructorsPage = () => {
           </div>
         ))}
       </div>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default InstructorsPage;

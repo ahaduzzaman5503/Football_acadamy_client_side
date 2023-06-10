@@ -1,11 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
 import './index.css'
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import {  createBrowserRouter, RouterProvider, } from "react-router-dom";
 import Main from './layouts/Main.jsx';
 import AuthProvider from './componants/AuthProvider/AuthProvider.jsx';
 import NotFound from './componants/NotFoundPage/NotFoundPage.jsx';
@@ -16,6 +12,13 @@ import PopularInstructors from './componants/HomePages/PopularInstructors.jsx';
 import ExtraSection from './componants/HomePages/ExtraSection.jsx';
 import PopularClasses from './componants/HomePages/PopularClasses.jsx';
 import InstructorsPage from './componants/InstructorsPage/InstructorsPage.jsx';
+import Dashboard from './layouts/Dashboard/Dashboard.jsx';
+import MySelectedClasses from './componants/StudentDashboard/MySelectedClasses.jsx';
+import MyEnrolledClasses from './componants/StudentDashboard/MyEnrolledClasses.jsx';
+import PaymentStudent from './componants/StudentDashboard/PaymentStudent';
+import PaymentHistory from './componants/StudentDashboard/PaymentHistory';
+import ManageClasses from './componants/AdminDashboard/ManageClasses';
+import ManageUsers from './componants/AdminDashboard/ManageUsers';
 
 const router = createBrowserRouter([
   {
@@ -52,6 +55,35 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>
+      }
+    ]
+  },
+  {
+    path:"/dashboard", element: <Dashboard></Dashboard>,
+    children: [
+      {
+        path:"/dashboard/selectedclases", 
+        element: <MySelectedClasses></MySelectedClasses>
+      },
+      {
+        path:"/dashboard/enroledclases", 
+        element:  <MyEnrolledClasses></MyEnrolledClasses>
+      },
+      {
+        path:"/dashboard/payment", 
+        element: <PaymentStudent></PaymentStudent>
+      },
+      {
+        path:"/dashboard/paymenthistory", 
+        element: <PaymentHistory></PaymentHistory>
+      },
+      {
+        path:"/dashboard/manageclasses", 
+        element: <ManageClasses></ManageClasses>
+      },
+      {
+        path:"/dashboard/manageusers", 
+        element:  <ManageUsers></ManageUsers>
       }
     ]
   },
