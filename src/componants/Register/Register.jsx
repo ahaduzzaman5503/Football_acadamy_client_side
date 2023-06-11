@@ -15,7 +15,7 @@ const Registration = () => {
 
   const location = useLocation();
   const navigate = useNavigate();
-  let from = location.state?.from?.pathname || "/login";
+  let from = location.state?.from?.pathname || "/";
 
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
@@ -27,7 +27,7 @@ const Registration = () => {
         const googleUser = result.user;
         saveuser(result.user);
 
-        navigate(from);
+        navigate(from, {replace: true})
       })
       .catch((error) => {
         console.log("error", error.message);
@@ -76,6 +76,7 @@ const Registration = () => {
       .then((result) => {
         updateProfile(auth.currentUser, {displayName: name, photoURL: photoUrl})
         .then(result => {
+          navigate(from, {replace: true})
         })
       })
       .catch((error) => {
@@ -85,8 +86,6 @@ const Registration = () => {
     .catch((error) => {
       console.log("error", error.message);
     });
-    
-
     console.log(name, email, password, confirmPassword, photo);
   };
 

@@ -21,6 +21,7 @@ import ManageClasses from './componants/AdminDashboard/ManageClasses';
 import ManageUsers from './componants/AdminDashboard/ManageUsers';
 import MyClass from './componants/InstructorDashboard/MyClass';
 import AddClass from './componants/InstructorDashboard/AddClass';
+import PrivateRoute from './componants/PrivateRoute/PrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -61,11 +62,12 @@ const router = createBrowserRouter([
     ]
   },
   {
-    path:"/dashboard", element: <Dashboard></Dashboard>,
+    path:"/dashboard", element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
     children: [
       {
         path:"/dashboard/selectedclases", 
-        element: <MySelectedClasses></MySelectedClasses>
+        element: <MySelectedClasses></MySelectedClasses>,
+        loader: () => fetch('http://localhost:5000/selectclass')
       },
       {
         path:"/dashboard/enroledclases", 
@@ -85,7 +87,8 @@ const router = createBrowserRouter([
       },
       {
         path:"/dashboard/myclass", 
-        element: <MyClass></MyClass>
+        element: <MyClass></MyClass>,
+        loader: () => fetch(`http://localhost:5000/addclassdata`)
       },
       {
         path:"/dashboard/manageclasses", 

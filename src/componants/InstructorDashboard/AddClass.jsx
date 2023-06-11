@@ -1,38 +1,49 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const AddClass = () => {
-    const handleAddClass = (event) => {
-        event.preventDefault();
-    
-        const ClassName = event.target.className.value;
-        const InstractiorName = event.target.instractiorName.value;
-        const price = event.target.price.value;
-        const AvailableSeats = event.target.availableSeats.value;
-        const email = event.target.email.value;
-        const photoUrl = event.target.classImage.value;
-    
-        const newClass = {
-            ClassName, InstractiorName, AvailableSeats, price, email,  photoUrl,
-        };
-        console.log(newClass);
-    
-        fetch("http://localhost:5000/addclassdata", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(newClass),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            if (data.acknowledged === true) {
-              alert("Toy Car Added Successfully");
-            }
-          });
-      };
+  const { users } = useContext(AuthContext);
+
+  const handleAddClass = (event) => {
+    event.preventDefault();
+
+    const ClassName = event.target.className.value;
+    const InstractiorName = users.displayName;
+    const price = event.target.price.value;
+    const AvailableSeats = event.target.availableSeats.value;
+    const email = users.email;
+    const photoUrl = event.target.classImage.value;
+
+    const newClass = {
+      ClassName,
+      InstractiorName,
+      AvailableSeats,
+      price,
+      email,
+      photoUrl,
+    };
+    console.log(newClass);
+
+    fetch("http://localhost:5000/addclassdata", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newClass),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.acknowledged === true) {
+          alert("Toy Car Added Successfully");
+        }
+      });
+  };
   return (
     <div>
+      <h1 className="flex justify-center font-bold text-4xl py-10">
+        Add A Class
+      </h1>
       <form onSubmit={handleAddClass}>
         {/* class name */}
         <div class="mb-6">
@@ -79,7 +90,8 @@ const AddClass = () => {
             id="instractiorName"
             name="instractiorName"
             class="bg-green-50 border border-green-500 text-green-900 placeholder-green-700 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-green-100 dark:border-green-400"
-            placeholder="instractior Name"
+            placeholder={users.displayName}
+            readOnly
           />
         </div>
         {/* instractor email */}
@@ -95,8 +107,8 @@ const AddClass = () => {
             id="email"
             name="email"
             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-            placeholder="name@yourwebsite.com"
-            required
+            placeholder={users.email}
+            readOnly
           />
         </div>
         {/* Available seats*/}

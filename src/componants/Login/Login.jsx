@@ -12,7 +12,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
-
+  console.log(from);
   const [user, setUser] = useState(null);
   const [error, setError] = useState("");
   const [seccess, setSuccess] = useState("");
@@ -26,6 +26,7 @@ const Login = () => {
     .then((result) => {
       const googleUser = result.user;
       saveuser(result.user)
+      navigate(from, {replace: true})
     })
     .catch((error) => {
       console.log("error", error.message);
@@ -56,7 +57,7 @@ const Login = () => {
         event.target.reset();
         setSuccess("User Login Successfully");
         saveuser(result.user)
-        navigate(from)
+        navigate(from, {replace: true})
         from.reset()
       })
       .catch((error) => {
