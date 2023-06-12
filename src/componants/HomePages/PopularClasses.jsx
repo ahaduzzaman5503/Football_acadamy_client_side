@@ -4,14 +4,17 @@ import { GrSelect } from 'react-icons/gr';
 const PopularClasses = () => {
   const [classesData, setClassesData] = useState([]);
   const [showAll, setShowAll] = useState(false);
-
+  
   const haldleSelect = ( classItem) => {
+    console.log(classItem);
+    const { _id, ...selectedClassItem } = classItem;
+    
     fetch("http://localhost:5000/selectclass", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(classItem),
+      body: JSON.stringify(selectedClassItem),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -21,6 +24,22 @@ const PopularClasses = () => {
         }
       });
   };
+
+  const handleClassDelete = id => {
+    const proceed = confirm('Are you sure to want to delete?')
+    if(proceed){
+      fetch(`http://localhost:5000/selectclass/${id}`, {
+        method: 'DELETE'
+      })
+      .then(res=> res.json())
+      .then(data => {
+        console.log(data);
+        if(data.deletedCount > 0) {
+          alert('Data Deleted Successfull wow')
+        }
+      })
+    }
+  }
   
 
   useEffect(() => {
@@ -98,7 +117,7 @@ const PopularClasses = () => {
                       Students: {classItem.studentCount}
                     </p>
                     <button 
-                      onClick={() => haldleSelect(classItem )}
+                      onClick={() => haldleSelect( classItem )}
                       className="btn btn-primary"
                     >
                       Select Class 

@@ -25,11 +25,11 @@ const Footer = () => {
 
         <div>
           <ul>
-            <li>Comming</li>
-            <li>Comming</li>
-            <li>Comming</li>
-            <li>Comming</li>
-            <li>Comming</li>
+            <li><span className="footer-title">contact information</span></li>
+            <li><a className="link link-hover">Name: Ahaduzzaman</a></li>
+            <li><a href="tel:+4733378901">Phone: 01734545503</a></li>
+            <li> <a href="mailto:ahaduzzaman45503@gmail.com">Email: ahaduzzaman45503@gmail.com</a></li>
+            <li><a className="link link-hover">Address: Habigang, Sylhet.</a></li>
           </ul>
         </div>
 
