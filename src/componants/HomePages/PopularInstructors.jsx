@@ -7,7 +7,7 @@ const PopularInstructors = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/instractor");
+        const response = await fetch("https://football-acadamy-server.vercel.app/instractor");
         const data = await response.json();
         setInstructors(data);
       } catch (error) {

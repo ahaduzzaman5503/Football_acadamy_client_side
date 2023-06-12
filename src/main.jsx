@@ -35,21 +35,21 @@ const router = createBrowserRouter([
       {
         path: "/footballclass", 
         element: <PopularClasses></PopularClasses>,
-        // loader: () => fetch('http://localhost:5000/footballclass')
+        // loader: () => fetch('https://football-acadamy-server.vercel.app/footballclass')
       },
       {
         path: "/instractor", 
         element: <PopularInstructors></PopularInstructors>,
-        // loader: () => fetch('http://localhost:5000/instractor'),
+        // loader: () => fetch('https://football-acadamy-server.vercel.app/instractor'),
       },
       {
         path: "/extrasection", 
         element: <ExtraSection></ExtraSection>,
-        // loader: () => fetch('http://localhost:5000/extrasection'),
+        // loader: () => fetch('https://football-acadamy-server.vercel.app/extrasection'),
       },
       {
         path: "/instractors", element: <InstructorsPage></InstructorsPage>,
-        loader: () => fetch('http://localhost:5000/instractor')
+        loader: () => fetch('https://football-acadamy-server.vercel.app/instractor')
       },
       {
         path: "/login",
@@ -67,7 +67,7 @@ const router = createBrowserRouter([
       {
         path:"/dashboard/selectedclases", 
         element: <MySelectedClasses></MySelectedClasses>,
-        loader: () => fetch('http://localhost:5000/selectclass')
+        loader: () => fetch('https://football-acadamy-server.vercel.app/selectclass')
       },
       {
         path:"/dashboard/enroledclases", 
@@ -88,7 +88,7 @@ const router = createBrowserRouter([
       {
         path:"/dashboard/myclass", 
         element: <MyClass></MyClass>,
-        loader: () => fetch(`http://localhost:5000/addclassdata`)
+        loader: () => fetch(`https://football-acadamy-server.vercel.app/addclassdata`)
       },
       {
         path:"/dashboard/manageclasses", 

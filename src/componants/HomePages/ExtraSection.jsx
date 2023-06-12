@@ -6,7 +6,7 @@ const ExtraSection = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/extrasection");
+        const response = await fetch("https://football-acadamy-server.vercel.app/extrasection");
         const data = await response.json();
         setFacilities(data);
       } catch (error) {
