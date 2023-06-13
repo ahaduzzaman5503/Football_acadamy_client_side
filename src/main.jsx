@@ -22,6 +22,16 @@ import ManageUsers from './componants/AdminDashboard/ManageUsers';
 import MyClass from './componants/InstructorDashboard/MyClass';
 import AddClass from './componants/InstructorDashboard/AddClass';
 import PrivateRoute from './componants/PrivateRoute/PrivateRoute';
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+import Classes from './componants/HomePages/Classes';
+const queryClient = new QueryClient()
+
 
 const router = createBrowserRouter([
   {
@@ -51,6 +61,10 @@ const router = createBrowserRouter([
         path: "/instractors", element: <InstructorsPage></InstructorsPage>,
         loader: () => fetch('https://football-acadamy-server.vercel.app/instractor')
       },
+      {
+        path: "/classes", element: <Classes></Classes>,
+        loader: () => fetch('https://football-acadamy-server.vercel.app/footballclass')
+      }, 
       {
         path: "/login",
         element: <Login></Login>
@@ -106,8 +120,10 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
-     <RouterProvider router={router} />
-    </AuthProvider>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+      </AuthProvider>
   </React.StrictMode>
 );
 

@@ -7,6 +7,7 @@ import {
 } from "firebase/auth";
 import React, { createContext, useEffect, useState } from "react";
 import app from "../firebase/firebase.init";
+import axios from 'axios';
 
 export const AuthContext = createContext(null);
 
@@ -33,6 +34,13 @@ const AuthProvider = ({ children }) => {
     const unsuscribe = onAuthStateChanged(auth, (curentUser) => {
       setLoading(false);
       setUsers(curentUser);
+
+      if(createUser){
+        axios.post('https://football-acadamy-server.vercel.app/jwt', {email: curentUser.email})
+        .then(data => {
+          console.log(data);
+        })
+      }
     });
     return () => {
       return unsuscribe();

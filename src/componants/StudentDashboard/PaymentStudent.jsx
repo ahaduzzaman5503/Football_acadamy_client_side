@@ -5,6 +5,7 @@ import { Elements } from "@stripe/react-stripe-js";
 
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_Getway_PK);
 
+
 const PaymentStudent = () => { 
   return (
     <div>

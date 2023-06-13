@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { GrSelect } from 'react-icons/gr';
+import swal from 'sweetalert';
+
 
 const PopularClasses = () => {
   const [classesData, setClassesData] = useState([]);
@@ -20,7 +22,12 @@ const PopularClasses = () => {
       .then((data) => {
         console.log(data);
         if (data.acknowledged === true) {
-          alert("Class Selected Successfully");
+          swal({
+            title: "Added Class Successfully",
+            text: "You Selected the Class!",
+            icon: "success",
+          });
+          
         }
       });
   };

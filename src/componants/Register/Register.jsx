@@ -12,6 +12,7 @@ const Registration = () => {
   const [user, setUser] = useState(null);
   const [seccess, setSuccess] = useState("");
   const [error, setError] = useState("");
+  
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -26,7 +27,6 @@ const Registration = () => {
       .then((result) => {
         const googleUser = result.user;
         saveuser(result.user);
-
         navigate(from, {replace: true})
       })
       .catch((error) => {
@@ -76,6 +76,7 @@ const Registration = () => {
       .then((result) => {
         updateProfile(auth.currentUser, {displayName: name, photoURL: photoUrl})
         .then(result => {
+          saveuser({email, displayName: name, photoURL: photoUrl})
           navigate(from, {replace: true})
         })
       })

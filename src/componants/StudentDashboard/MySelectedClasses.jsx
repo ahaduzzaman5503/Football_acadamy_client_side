@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { AiFillDelete } from "react-icons/ai";
+import swal from 'sweetalert';
+import useCard from "../Hooks/useCard";
 
 const MySelectedClasses = () => {
-  const myClasses = useLoaderData();   
+  // const myClasses = useLoaderData();
+  const [card, , refetch] = useCard();
 
   const handleClassDelete = id => {
     const proceed = confirm('Are you sure to want to delete?')
@@ -13,10 +16,15 @@ const MySelectedClasses = () => {
       })
       .then(res=> res.json())
       .then(data => {
+        refetch()
         console.log(data);
         if(data.deletedCount > 0) {
-          alert('Data Deleted Successfull wow')
-          window.location.reload(true)
+          swal({
+            title: "Delete Sussess!",
+            icon: "success",
+          });
+          refetch()
+          // window.location.reload(true)
         }
       })
     }
@@ -42,7 +50,7 @@ const MySelectedClasses = () => {
               </tr>
             </thead>
             <tbody>
-              {myClasses.map((classItem, index) => (
+              {card.map((classItem, index) => (
                 <tr key={index} className="bg-slate-800 shadow-2xl">
                   <td>{index + 1}</td>
                   <td>
