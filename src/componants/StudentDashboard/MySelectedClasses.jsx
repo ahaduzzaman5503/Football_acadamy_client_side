@@ -11,7 +11,7 @@ const MySelectedClasses = () => {
   const handleClassDelete = id => {
     const proceed = confirm('Are you sure to want to delete?')
     if(proceed){
-      fetch(`http://localhost:5000/selectclass/${id}`, {
+      fetch(`https://football-acadamy-server.vercel.app/selectclass/${id}`, {
         method: 'DELETE'
       })
       .then(res=> res.json())

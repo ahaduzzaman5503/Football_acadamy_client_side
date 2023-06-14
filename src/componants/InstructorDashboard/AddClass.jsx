@@ -24,7 +24,7 @@ const AddClass = () => {
     };
     console.log(newClass);
 
-    fetch("http://localhost:5000/addclassdata", {
+    fetch("https://football-acadamy-server.vercel.app/addclassdata", {
       method: "POST",
       headers: {
         "content-type": "application/json",
