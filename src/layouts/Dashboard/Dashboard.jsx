@@ -11,7 +11,6 @@ import useAdmin from "../../componants/Hooks/useAdmin";
 
 const Dashboard = () => {
 
-  // const isAdmin = true;
   const [isAdmin] = useAdmin();
   return (
     <div className="container mx-auto">

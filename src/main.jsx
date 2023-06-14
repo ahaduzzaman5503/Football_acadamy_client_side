@@ -45,25 +45,25 @@ const router = createBrowserRouter([
       {
         path: "/footballclass", 
         element: <PopularClasses></PopularClasses>,
-        // loader: () => fetch('https://football-acadamy-server.vercel.app/footballclass')
+        // loader: () => fetch('http://localhost:5000/footballclass')
       },
       {
         path: "/instractor", 
         element: <PopularInstructors></PopularInstructors>,
-        // loader: () => fetch('https://football-acadamy-server.vercel.app/instractor'),
+        // loader: () => fetch('http://localhost:5000/instractor'),
       },
       {
         path: "/extrasection", 
         element: <ExtraSection></ExtraSection>,
-        // loader: () => fetch('https://football-acadamy-server.vercel.app/extrasection'),
+        // loader: () => fetch('http://localhost:5000/extrasection'),
       },
       {
         path: "/instractors", element: <InstructorsPage></InstructorsPage>,
-        loader: () => fetch('https://football-acadamy-server.vercel.app/instractor')
+        loader: () => fetch('http://localhost:5000/instractor')
       },
       {
         path: "/classes", element: <Classes></Classes>,
-        loader: () => fetch('https://football-acadamy-server.vercel.app/footballclass')
+        loader: () => fetch('http://localhost:5000/footballclass')
       }, 
       {
         path: "/login",
@@ -81,7 +81,7 @@ const router = createBrowserRouter([
       {
         path:"/dashboard/selectedclases", 
         element: <MySelectedClasses></MySelectedClasses>,
-        loader: () => fetch('https://football-acadamy-server.vercel.app/selectclass')
+        loader: () => fetch('http://localhost:5000/selectclass')
       },
       {
         path:"/dashboard/enroledclases", 
@@ -102,7 +102,7 @@ const router = createBrowserRouter([
       {
         path:"/dashboard/myclass", 
         element: <MyClass></MyClass>,
-        loader: () => fetch(`https://football-acadamy-server.vercel.app/addclassdata`)
+        loader: () => fetch(`http://localhost:5000/addclassdata`)
       },
       {
         path:"/dashboard/manageclasses", 
