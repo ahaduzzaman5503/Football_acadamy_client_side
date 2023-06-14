@@ -8,7 +8,7 @@ import { FcGoogle } from "react-icons/fc";
 import { saveuser } from "../Api/Api";
 
 const Registration = () => {
-  const { users, createUser } = useContext(AuthContext);
+  const { users, currentUser } = useContext(AuthContext);
   const [user, setUser] = useState(null);
   const [seccess, setSuccess] = useState("");
   const [error, setError] = useState("");
@@ -85,7 +85,7 @@ const Registration = () => {
     }).then(res => res.json()).then(imgedata => {
       console.log(imgedata);
       const photoUrl = imgedata.data.display_url
-      createUser(email, password)
+      currentUser(email, password)
       .then((result) => {
         updateProfile(auth.currentUser, {displayName: name, photoURL: photoUrl})
         .then(result => {

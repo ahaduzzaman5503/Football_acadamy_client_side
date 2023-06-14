@@ -16,7 +16,7 @@ const AuthProvider = ({ children }) => {
   const [users, setUsers] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const createUser = (email, password) => {
+  const currentUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
@@ -34,7 +34,7 @@ const AuthProvider = ({ children }) => {
     const unsuscribe = onAuthStateChanged(auth, (curentUser) => {
 
 
-      if(createUser){
+      if(currentUser){
         axios.post('https://football-acadamy-server.vercel.app/jwt', {email: curentUser?.email})
         .then(data => {
           console.log(data.data.token);
@@ -55,7 +55,7 @@ const AuthProvider = ({ children }) => {
 
   const authInfo = {
     users,
-    createUser,
+    currentUser,
     signIn,
     logOut,
     loading,
