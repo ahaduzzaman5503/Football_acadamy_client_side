@@ -50,7 +50,6 @@ const Registration = () => {
   const PhotoUrlHandle = (event) => {
     console.log(event.target.value);
   };
-  const url = `https://api.imgbb.com/1/upload?key=4e99818e21d6800bb4874a68d0096dd4`;
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -58,7 +57,21 @@ const Registration = () => {
     const email = event.target.email.value;
     const password = event.target.password.value;
     const confirmPassword = event.target.confirmpasswords.value;
+    if(password.length < 6 ) {
+      return setError("Please Enter at least 6 character ")
+    }
+  // At least one capital letter
+  if (!/[A-Z]/.test(password)) {
+    return setError('Password at least one capital letter');
+  }
 
+  // At least one special character
+  if (!/[!@#$%^&*]/.test(password)) {
+    return setError('Password at least one special character');
+  }
+  if(confirmPassword !== password){
+    return setError(" Password doesn't matched!")
+  }
     // image Upload
     const photo = event.target.photo.files[0];
     const formData = new FormData()

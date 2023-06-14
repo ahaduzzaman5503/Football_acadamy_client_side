@@ -1,13 +1,18 @@
 import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import {GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, signInWithPopup} from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  getAuth,
+  signInWithPopup,
+} from "firebase/auth";
 import app from "../firebase/firebase.init";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { FcGoogle } from "react-icons/fc";
 import { saveuser } from "../Api/Api";
 
 const Login = () => {
-  const {signIn} = useContext(AuthContext)
+  const { signIn } = useContext(AuthContext);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -18,22 +23,22 @@ const Login = () => {
   const [seccess, setSuccess] = useState("");
 
   const auth = getAuth(app);
-  const provider = new GoogleAuthProvider()
+  const provider = new GoogleAuthProvider();
 
   /*==================Google Login=========================*/
   const handleGoogleSignIn = () => {
     signInWithPopup(auth, provider)
-    .then((result) => {
-      const googleUser = result.user;
-      saveuser(result.user)
-      navigate(from, {replace: true})
-    })
-    .catch((error) => {
-      console.log("error", error.message);
-    });
-  }
+      .then((result) => {
+        const googleUser = result.user;
+        saveuser(result.user);
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        console.log("error", error.message);
+      });
+  };
 
-    /*================Email Password Login=================*/
+  /*================Email Password Login=================*/
   const handleEmailChange = (event) => {
     console.log(event.target.value);
   };
@@ -41,12 +46,24 @@ const Login = () => {
     console.log(event.target.value);
   };
 
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
     console.log(email, password);
+
+    if (password.length < 6) {
+      return setError("Please Enter at least 6 character ");
+    }
+    // At least one capital letter
+    if (!/[A-Z]/.test(password)) {
+      return setError("Password at least one capital letter");
+    }
+
+    // At least one special character
+    if (!/[!@#$%^&*]/.test(password)) {
+      return setError("Password at least one special character");
+    }
 
     signIn(email, password)
       .then((result) => {
@@ -56,9 +73,9 @@ const Login = () => {
         setError("");
         event.target.reset();
         setSuccess("User Login Successfully");
-        saveuser(result.user)
-        navigate(from, {replace: true})
-        from.reset()
+        saveuser(result.user);
+        navigate(from, { replace: true });
+        from.reset();
       })
       .catch((error) => {
         setError(error.message);
@@ -74,7 +91,7 @@ const Login = () => {
             Please Login
           </div>
           <form onSubmit={handleSubmit} className="card-body">
-{/* =================Email Field======================= */}
+            {/* =================Email Field======================= */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text font-bold text-xl">Email</span>
@@ -88,7 +105,7 @@ const Login = () => {
               />
             </div>
 
-{/*=================PassWord Field================== */}
+            {/*=================PassWord Field================== */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text font-bold text-xl">Password</span>
@@ -117,19 +134,20 @@ const Login = () => {
           <p className="text-red-500 text-center mb-3">{error}</p>
           <p className="text-green-400 text-center mb-3">{seccess}</p>
           <div className="form-control px-8 mb-3">
-            <button className="btn btn-info" 
-            onClick={handleGoogleSignIn}
-            >
-              <FcGoogle size={30}></FcGoogle>  Continue With Google
+            <button className="btn btn-info" onClick={handleGoogleSignIn}>
+              <FcGoogle size={30}></FcGoogle> Continue With Google
             </button>
           </div>
 
           <div className="flex items-center gap-2 text-center mx-10 mb-2">
             <h1 className="text-blue-600 ms-5">New to Football Acadamy?</h1>
-              <Link to={"/register"} className="bg-blue-200 font-bold text-black rounded-lg p-2">Register</Link>
+            <Link
+              to={"/register"}
+              className="bg-blue-200 font-bold text-black rounded-lg p-2"
+            >
+              Register
+            </Link>
           </div>
-
-
         </div>
       </div>
     </div>

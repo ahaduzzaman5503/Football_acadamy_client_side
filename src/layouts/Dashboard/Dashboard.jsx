@@ -6,11 +6,13 @@ import { GiTeacher } from 'react-icons/gi';
 import { GrUserAdmin } from 'react-icons/gr';
 import { FaChalkboardTeacher } from 'react-icons/fa';
 import { BsFillPeopleFill } from 'react-icons/bs';
+import useAdmin from "../../componants/Hooks/useAdmin";
 
 
 const Dashboard = () => {
 
-  const isAdmin = true;
+  // const isAdmin = true;
+  const [isAdmin] = useAdmin()
   return (
     <div className="container mx-auto">
       <div className="drawer lg:drawer-open">
