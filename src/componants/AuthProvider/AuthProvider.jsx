@@ -32,17 +32,20 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsuscribe = onAuthStateChanged(auth, (curentUser) => {
-      setLoading(false);
-      setUsers(curentUser);
+
 
       if(createUser){
-        axios.post('https://football-acadamy-server.vercel.app/jwt', {email: curentUser.email})
+        axios.post('https://football-acadamy-server.vercel.app/jwt', {email: curentUser?.email})
         .then(data => {
           console.log(data.data.token);
           localStorage.setItem('access-token', data.data.token)
+          setLoading(false);
+          setUsers(curentUser);
         })
       } else{
         localStorage.removeItem('access-token')
+        setLoading(false);
+        setUsers(curentUser);
       }
     });
     return () => {

@@ -3,11 +3,13 @@ import { useLoaderData } from "react-router-dom";
 import { AiFillDelete } from "react-icons/ai";
 import { useQuery } from "@tanstack/react-query";
 import swal from "sweetalert";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const ManageUsers = () => {
+  const [axiosSucure] = useAxiosSecure();
   const {data: users = [], refetch} = useQuery(['users'], async() => {
-    const res = await fetch('https://football-acadamy-server.vercel.app/users')
-    return res.json();
+    const res = await axiosSucure.get('/users')
+    return res.data;
   })
 
   const handleMakeAdmin = user => {

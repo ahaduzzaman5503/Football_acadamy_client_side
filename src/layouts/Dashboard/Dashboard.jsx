@@ -12,7 +12,7 @@ import useAdmin from "../../componants/Hooks/useAdmin";
 const Dashboard = () => {
 
   // const isAdmin = true;
-  const [isAdmin] = useAdmin()
+  const [isAdmin] = useAdmin();
   return (
     <div className="container mx-auto">
       <div className="drawer lg:drawer-open">
