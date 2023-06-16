@@ -44,14 +44,14 @@ const Dashboard = () => {
                 <div class="flex flex-col items-center pb-5">
                   <img
                     class="w-14 h-14 mb-3 rounded-full shadow-lg"
-                    src={users.photoURL}
+                    src={users?.photoURL}
                     alt="Bonnie image"
                   />
                   <h5 class="mb-1 text-md font-medium text-gray-900 dark:text-white">
-                    {users.displayName}
+                    {users?.displayName}
                   </h5>
                   <span class="text-sm text-gray-500 dark:text-gray-400">
-                    {users.email}
+                    {users?.email}
                   </span>
                 </div>
               </div>
