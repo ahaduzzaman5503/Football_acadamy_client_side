@@ -30,6 +30,7 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 import Classes from './componants/HomePages/Classes';
+import AdminRoute from './componants/PrivateRoute/AdminRoute';
 const queryClient = new QueryClient()
 
 
@@ -45,25 +46,25 @@ const router = createBrowserRouter([
       {
         path: "/footballclass", 
         element: <PopularClasses></PopularClasses>,
-        // loader: () => fetch('http://localhost:5000/footballclass')
+        // loader: () => fetch('https://football-acadamy-server.vercel.app/footballclass')
       },
       {
         path: "/instractor", 
         element: <PopularInstructors></PopularInstructors>,
-        // loader: () => fetch('http://localhost:5000/instractor'),
+        // loader: () => fetch('https://football-acadamy-server.vercel.app/instractor'),
       },
       {
         path: "/extrasection", 
         element: <ExtraSection></ExtraSection>,
-        // loader: () => fetch('http://localhost:5000/extrasection'),
+        // loader: () => fetch('https://football-acadamy-server.vercel.app/extrasection'),
       },
       {
         path: "/instractors", element: <InstructorsPage></InstructorsPage>,
-        loader: () => fetch('http://localhost:5000/instractor')
+        loader: () => fetch('https://football-acadamy-server.vercel.app/instractor')
       },
       {
         path: "/classes", element: <Classes></Classes>,
-        loader: () => fetch('http://localhost:5000/footballclass')
+        loader: () => fetch('https://football-acadamy-server.vercel.app/footballclass')
       }, 
       {
         path: "/login",
@@ -81,14 +82,14 @@ const router = createBrowserRouter([
       {
         path:"/dashboard/selectedclases", 
         element: <MySelectedClasses></MySelectedClasses>,
-        loader: () => fetch('http://localhost:5000/selectclass')
+        // loader: () => fetch('https://football-acadamy-server.vercel.app/selectclass')
       },
       {
         path:"/dashboard/enroledclases", 
         element:  <MyEnrolledClasses></MyEnrolledClasses>
       },
       {
-        path:"/dashboard/payment", 
+        path:"/dashboard/payment/:id", 
         element: <PaymentStudent></PaymentStudent>
       },
       {
@@ -102,7 +103,7 @@ const router = createBrowserRouter([
       {
         path:"/dashboard/myclass", 
         element: <MyClass></MyClass>,
-        loader: () => fetch(`http://localhost:5000/addclassdata`)
+        loader: () => fetch(`https://football-acadamy-server.vercel.app/addclassdata`)
       },
       {
         path:"/dashboard/manageclasses", 
@@ -110,7 +111,7 @@ const router = createBrowserRouter([
       },
       {
         path:"/dashboard/manageusers", 
-        element:  <ManageUsers></ManageUsers>
+        element:  <AdminRoute></AdminRoute>
       }
     ]
   },

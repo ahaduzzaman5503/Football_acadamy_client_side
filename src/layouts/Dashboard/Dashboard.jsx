@@ -63,10 +63,6 @@ const Dashboard = () => {
                       <MdCollectionsBookmark size={25}></MdCollectionsBookmark> My Enrolled Class</Link>
                     </li>
                     <li>
-                      <Link to='/dashboard/payment' className="shadow-xl"> 
-                      <MdPayment size={25}></MdPayment> Student Payment</Link>
-                    </li>
-                    <li>
                       <Link to='/dashboard/paymenthistory' className="shadow-xl"> 
                       <MdManageHistory size={25}></MdManageHistory> Payment history</Link>
                     </li>

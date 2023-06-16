@@ -6,12 +6,18 @@ import useCard from "../Hooks/useCard";
 
 const MySelectedClasses = () => {
   // const myClasses = useLoaderData();
-  const [card, , refetch] = useCard();
+  const [cart, isLoading, refetch] = useCard();
+  console.log(cart);
+  // const total = cart.reduce((sum, item) => item.price + sum, 0);
+
+  const handlePayment = id => {
+    console.log('payment Clicked');
+  }
 
   const handleClassDelete = id => {
     const proceed = confirm('Are you sure to want to delete?')
     if(proceed){
-      fetch(`http://localhost:5000/selectclass/${id}`, {
+      fetch(`https://football-acadamy-server.vercel.app/selectclass/${id}`, {
         method: 'DELETE'
       })
       .then(res=> res.json())
@@ -43,6 +49,7 @@ const MySelectedClasses = () => {
                 <th>S/N</th>
                 <th>Class Photo</th>
                 <th>Class Name</th>
+                <th>Price</th>
                 <th>Description</th>
                 <th>Student</th>
                 <th>Payment</th>
@@ -50,7 +57,7 @@ const MySelectedClasses = () => {
               </tr>
             </thead>
             <tbody>
-              {card.map((classItem, index) => (
+              {cart.map((classItem, index) => (
                 <tr key={index} className="bg-slate-800 shadow-2xl">
                   <td>{index + 1}</td>
                   <td>
@@ -69,6 +76,11 @@ const MySelectedClasses = () => {
                   </td>
                   <td>
                     <div>
+                      <div className="font-bold">{classItem.pricee}</div>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
                       <div className="font-bold">{classItem.description}</div>
                     </div>
                   </td>
@@ -78,7 +90,9 @@ const MySelectedClasses = () => {
                     </div>
                   </td>
                   <td>
-                    <Link to="/dashboard/payment">
+                    <Link to="/dashboard/payment/id"
+                    // onClick={() => handlePayment(classItem._id)}
+                    >
                      <button className="btn btn-xs text-orange-400">Pay</button>
                     </Link>
                   </td>

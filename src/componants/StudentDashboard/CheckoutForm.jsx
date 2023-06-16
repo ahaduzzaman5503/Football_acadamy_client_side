@@ -1,14 +1,24 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ price }) => {
   const stripe = useStripe();
   const elements = useElements();
+  const [axiosSecure] = useAxiosSecure();
   const [cardError, setCardError] = useState("");
+  const [clientSecret, setClientSecret] = useState('');
+  const {users} = useContext(AuthContext);
 
   useEffect( () => {
-
+    axiosSecure.post('/createpayment', {price})
+    .then(res => {
+      console.log(res.data.clientSecret);
+      setClientSecret(res.data.clientSecret);
+    })
   }, [])
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -30,8 +40,23 @@ const CheckoutForm = () => {
       setCardError(error.message);
     } else {
       setCardError("");
-      console.log("Payment Method", paymentMethod);
+      console.log("Payment Method", paymentMethod);  
     }
+
+    const {paymentIntent, error: confirmError} = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: card,
+        billing_details: {
+          name: users?.email || "no email",
+          email: users?.displayName || "no name",
+        },
+      },
+    })
+    if(confirmError){
+      console.log(confirmError);
+    }
+    console.log("payment 58 no line", paymentIntent);
+
   };
   return (
     <>
@@ -55,7 +80,7 @@ const CheckoutForm = () => {
         </CardElement>
         <button
           type="submit"
-          disabled={!stripe}
+          disabled={!stripe || !clientSecret}
           className="px-5 py-1 rounded-md mt-3 text-black font-bold bg-white"
         >
           Pay
@@ -63,7 +88,7 @@ const CheckoutForm = () => {
       </form>
 
       {
-        cardError && <p className="text-red-400">{cardError}</p>
+        cardError && <p className="text-red-500 pt-3 font-bold">{cardError}</p>
       }
     </>
   );

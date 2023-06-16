@@ -6,10 +6,10 @@ import {
   signOut,
 } from "firebase/auth";
 import React, { createContext, useEffect, useState } from "react";
+import axios from "axios";
 import app from "../firebase/firebase.init";
-import axios from 'axios';
 
-export const AuthContext = createContext(null);
+export const AuthContext = createContext({});
 
 const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
@@ -32,21 +32,20 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsuscribe = onAuthStateChanged(auth, (curentUser) => {
-
-
-      if(currentUser){
-        axios.post('http://localhost:5000/jwt', {email: curentUser?.email})
-        .then(data => {
-          console.log(data.data.token);
-          localStorage.setItem('access-token', data.data.token)
-          setLoading(false);
-          setUsers(curentUser);
-        })
-      } else{
-        localStorage.removeItem('access-token')
+      if (currentUser) {
+        axios
+          .post("https://football-acadamy-server.vercel.app/jwt", { email: curentUser?.email })
+          .then((data) => {
+            localStorage.setItem("access-token", data.data.token);
+            setUsers(curentUser);
+            setLoading(false);
+          });
+      } else {
+        localStorage.removeItem("access-token");
         setLoading(false);
-        setUsers(curentUser);
+        // setUsers(curentUser);
       }
+      setLoading(false);
     });
     return () => {
       return unsuscribe();
@@ -54,11 +53,11 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const authInfo = {
-    users,
     currentUser,
     signIn,
     logOut,
     loading,
+    users
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

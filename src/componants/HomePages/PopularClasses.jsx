@@ -8,10 +8,9 @@ const PopularClasses = () => {
   const [showAll, setShowAll] = useState(false);
   
   const haldleSelect = ( classItem) => {
-    console.log(classItem);
     const { _id, ...selectedClassItem } = classItem;
     
-    fetch("http://localhost:5000/selectclass", {
+    fetch("https://football-acadamy-server.vercel.app/selectclass", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -35,7 +34,7 @@ const PopularClasses = () => {
   const handleClassDelete = id => {
     const proceed = confirm('Are you sure to want to delete?')
     if(proceed){
-      fetch(`http://localhost:5000/selectclass/${id}`, {
+      fetch(`https://football-acadamy-server.vercel.app/selectclass/${id}`, {
         method: 'DELETE'
       })
       .then(res=> res.json())
@@ -52,7 +51,7 @@ const PopularClasses = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/footballclass");
+        const response = await fetch("https://football-acadamy-server.vercel.app/footballclass");
         const data = await response.json();
         
         const sortedData = data.sort((a, b) => b.studentCount - a.studentCount);

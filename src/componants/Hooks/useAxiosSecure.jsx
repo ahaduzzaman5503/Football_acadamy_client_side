@@ -1,15 +1,15 @@
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import useAuth from './useAuth';
+import { useContext, useEffect } from 'react';
+import { AuthContext } from '../AuthProvider/AuthProvider';
 
 
 const useAxiosSecure = () => {
-    const { logOut } = useAuth(); 
+    const { logOut } = useContext(AuthContext); 
     const navigate = useNavigate(); 
     
     const axiosSecure = axios.create({
-      baseURL: 'http://localhost:5000', 
+      baseURL: 'https://football-acadamy-server.vercel.app', 
     });
 
   useEffect(() => {
