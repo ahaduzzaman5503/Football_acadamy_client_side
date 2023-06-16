@@ -76,7 +76,7 @@ const PopularClasses = () => {
         Popular Classes
       </h1>
       <div>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {showAll
             ? classesData.map((classItem, index) => (
                 <div

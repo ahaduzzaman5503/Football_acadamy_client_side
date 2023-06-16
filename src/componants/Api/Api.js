@@ -4,8 +4,6 @@ export const saveuser = user => {
         name: user.displayName,
         photo: user.photoURL
     }
-    console.log(currentUser);
-    console.log(user);
     fetch(`https://football-acadamy-server.vercel.app/users/${user?.email}`, {
         method: 'PUT',
         headers: {

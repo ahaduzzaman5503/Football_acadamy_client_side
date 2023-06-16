@@ -9,7 +9,8 @@ const useCard = () => {
     const [axiosSecure] = useAxiosSecure();
     const { isLoading, isError, data: card = [], error, refetch } = useQuery({
         queryKey: ['cart', users?.email],
-        enabled: !loading,
+        enabled: !loading && !! users?.email && !! localStorage.getItem('access-token'),
+
         queryFn: async () => {
             const res = await axiosSecure(`/selectclass?email=${users?.email}`)
             return res.data;

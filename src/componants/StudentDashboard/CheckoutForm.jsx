@@ -14,7 +14,7 @@ const CheckoutForm = ({ price }) => {
   useEffect( () => {
     axiosSecure.post('/createpayment', {price})
     .then(res => {
-      console.log(res.data.clientSecret);
+      // console.log(res.data.clientSecret);
       setClientSecret(res.data.clientSecret);
     })
   }, [])

@@ -10,13 +10,7 @@ const stripePromise = loadStripe(import.meta.env.VITE_Payment_Getway_PK);
 const PaymentStudent = () => { 
   const [cart] = useCard();
   const {id} = useParams();
-  
- const specificItemId = id;
- const specificItem = cart.find((item) => item.id === specificItemId);
-
- const price = specificItem ? specificItem.pricee : null;
- console.log(price);
-
+  const price = cart.find((data) => data._id === id)
 
   return (
     <div>
@@ -26,10 +20,8 @@ const PaymentStudent = () => {
       <div className="divider"></div> 
 
       <Elements stripe={stripePromise}>
-          <CheckoutForm price = {price}></CheckoutForm>
+          <CheckoutForm price = {price?.pricee} ></CheckoutForm>
       </Elements>
-      
-
     </div> 
   );
 };

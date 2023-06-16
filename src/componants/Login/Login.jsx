@@ -17,7 +17,6 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
-  console.log(from);
   const [user, setUser] = useState(null);
   const [error, setError] = useState("");
   const [seccess, setSuccess] = useState("");

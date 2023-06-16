@@ -58,10 +58,7 @@ const Navber = () => {
           <Link to="/">Home</Link>
           </li>
           <li>
-              <Link  to="/instractors"
-                 >
-                Instructors
-              </Link>
+              <Link  to="/instractors">Instructors </Link>
           </li>
           <li>
           <Link to="/classes" >Classes</Link>

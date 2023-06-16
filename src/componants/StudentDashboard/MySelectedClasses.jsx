@@ -5,14 +5,7 @@ import swal from 'sweetalert';
 import useCard from "../Hooks/useCard";
 
 const MySelectedClasses = () => {
-  // const myClasses = useLoaderData();
   const [cart, isLoading, refetch] = useCard();
-  console.log(cart);
-  // const total = cart.reduce((sum, item) => item.price + sum, 0);
-
-  const handlePayment = id => {
-    console.log('payment Clicked');
-  }
 
   const handleClassDelete = id => {
     const proceed = confirm('Are you sure to want to delete?')
@@ -90,10 +83,9 @@ const MySelectedClasses = () => {
                     </div>
                   </td>
                   <td>
-                    <Link to="/dashboard/payment/id"
-                    // onClick={() => handlePayment(classItem._id)}
-                    >
-                     <button className="btn btn-xs text-orange-400">Pay</button>
+                    <Link to={`/dashboard/payment/${classItem?._id}`}>
+                     <button className="btn btn-xs text-orange-400 py-2 px-4"
+                     >Pay</button>
                     </Link>
                   </td>
                   <td>

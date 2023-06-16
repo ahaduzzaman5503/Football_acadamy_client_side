@@ -32,17 +32,17 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsuscribe = onAuthStateChanged(auth, (curentUser) => {
+      setUsers(curentUser);
       if (currentUser) {
         axios
           .post("https://football-acadamy-server.vercel.app/jwt", { email: curentUser?.email })
           .then((data) => {
             localStorage.setItem("access-token", data.data.token);
-            setUsers(curentUser);
             setLoading(false);
           });
       } else {
         localStorage.removeItem("access-token");
-        setLoading(false);
+        // setLoading(false);
         // setUsers(curentUser);
       }
       setLoading(false);

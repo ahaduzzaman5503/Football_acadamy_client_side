@@ -46,17 +46,14 @@ const router = createBrowserRouter([
       {
         path: "/footballclass", 
         element: <PopularClasses></PopularClasses>,
-        // loader: () => fetch('https://football-acadamy-server.vercel.app/footballclass')
       },
       {
         path: "/instractor", 
         element: <PopularInstructors></PopularInstructors>,
-        // loader: () => fetch('https://football-acadamy-server.vercel.app/instractor'),
       },
       {
         path: "/extrasection", 
         element: <ExtraSection></ExtraSection>,
-        // loader: () => fetch('https://football-acadamy-server.vercel.app/extrasection'),
       },
       {
         path: "/instractors", element: <InstructorsPage></InstructorsPage>,
@@ -77,12 +74,11 @@ const router = createBrowserRouter([
     ]
   },
   {
-    path:"/dashboard", element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+    path:"/dashboard", element: <Dashboard></Dashboard>,
     children: [
       {
         path:"/dashboard/selectedclases", 
         element: <MySelectedClasses></MySelectedClasses>,
-        // loader: () => fetch('https://football-acadamy-server.vercel.app/selectclass')
       },
       {
         path:"/dashboard/enroledclases", 
@@ -92,6 +88,7 @@ const router = createBrowserRouter([
         path:"/dashboard/payment/:id", 
         element: <PaymentStudent></PaymentStudent>
       },
+
       {
         path:"/dashboard/paymenthistory", 
         element: <PaymentHistory></PaymentHistory>
@@ -111,7 +108,7 @@ const router = createBrowserRouter([
       },
       {
         path:"/dashboard/manageusers", 
-        element:  <AdminRoute></AdminRoute>
+        element:  <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
       }
     ]
   },

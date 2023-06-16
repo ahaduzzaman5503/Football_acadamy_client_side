@@ -8,6 +8,7 @@ const AdminRoute = ({children}) => {
     const {users, loading} = useContext(AuthContext);
     const [isAdmin, isAdminLoading] = useAdmin();
     const location = useLocation();
+    console.log(isAdmin, isAdminLoading); 
 
     if(loading || isAdminLoading){
         return <div className='flex items-center justify-center'>Loding...</div> 

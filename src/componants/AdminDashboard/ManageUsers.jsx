@@ -11,6 +11,7 @@ const ManageUsers = () => {
     const res = await axiosSucure.get('/users')
     return res.data;
   })
+  console.log(users);
 
   const handleMakeAdmin = user => {
     fetch(`https://football-acadamy-server.vercel.app/users/admin/${user._id}`, {
